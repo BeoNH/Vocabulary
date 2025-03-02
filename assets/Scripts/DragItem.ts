@@ -41,7 +41,7 @@ export class DragItem extends Component {
 
     // Xứ lý khi bắt đầu bấm vào để kéo
     private onTouchStart(event: EventTouch) {
-        if (this.node.parent?.getComponent(DropZone).doneZone) {
+        if (this.node.parent?.getComponent(DropZone).isCorrectDrop) {
             this.doneDrag();
             return;
         }
@@ -66,11 +66,12 @@ export class DragItem extends Component {
         if (!this.dropZones) return;
         for (let zoneNode of this.dropZones.children) {
             const dropZoneComp = zoneNode.getComponent(DropZone);
-            if (dropZoneComp && !dropZoneComp.doneZone && this.checkCollision(dropZoneComp.zoneWPos)) {
+            if (dropZoneComp && !dropZoneComp.isCorrectDrop && this.checkCollision(dropZoneComp.zoneWPos)) {
 
                 const child = zoneNode.getChildByPath(`DragItem`)
                 if (child && child !== this.node) {
                     child.parent = this.currentParent;
+                    child.setSiblingIndex(Math.max(0, this.currentParent.children.length - 2))
                     child.worldPosition = this.originalPos.clone();
 
                     this.originalPos = dropZoneComp.zoneWPos.worldPosition.clone();
@@ -84,6 +85,7 @@ export class DragItem extends Component {
     private onTouchEnd(event: EventTouch) {
         if (this.currentParent) {
             this.node.parent = this.currentParent;
+            this.node.setSiblingIndex(Math.max(0, this.currentParent.children.length - 2))
             const dropZoneComp = this.currentParent.getComponent(DropZone);
             if (dropZoneComp && dropZoneComp.zoneId === this.correctZoneId) {
                 this.doneDrag();
