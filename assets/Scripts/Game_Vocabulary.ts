@@ -3,6 +3,7 @@ import { GameManager } from './GameManager';
 import { DropZone } from './DropZone';
 import { DragItem } from './DragItem';
 import { LoadingScreen } from './LoadingScreen';
+import { UIControler } from './UIControler';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Vocabulary')
@@ -38,6 +39,10 @@ export class Game_Vocabulary extends Component {
     public scenePhase2: Node = null;
     @property({ type: Node, tooltip: "Ảnh các đáp án" })
     public imageAnswer: Node = null;
+    @property({ type: Label, tooltip: "Thời gian 1 câu" })
+    public labelTime: Label = null;
+    @property({ type: Label, tooltip: "Điểm phase đang chơi" })
+    public labelScore: Label = null;
     @property({ type: Label, tooltip: "Câu trả lời đúng" })
     public labelResults: Label = null;
     @property({ type: Node, tooltip: "Node các câu trả lời" })
@@ -55,10 +60,14 @@ export class Game_Vocabulary extends Component {
     private imageAnswerID: string[] = []; // Hình ảnh đáp án
     private firstTouch: boolean = true; // kiểm tra lần chạm đầu tiên mỗi Phase
 
+    private numTime: number = 0;
+    private numScore: number = 0;
+
+    private numScore_P2: number = 0;
+    private numScore_P3: number = 0;
+
     onLoad() {
         Game_Vocabulary.Instance = this;
-
-        this.node.on(Node.EventType.TOUCH_START, this.onTouchStart, this);
     }
 
     start(): void {
@@ -69,8 +78,13 @@ export class Game_Vocabulary extends Component {
 
     }
 
+    onEnable(): void {
+        this.node.on(Node.EventType.TOUCH_START, this.onTouchStart, this);
+    }
+
     onDisable(): void {
         this.node.off(Node.EventType.TOUCH_START, this.onTouchStart, this);
+        this.stopAnimation();
     }
 
 
@@ -102,7 +116,7 @@ export class Game_Vocabulary extends Component {
     private clearPhase2() {
         this.listAnswer.children.forEach(node => {
             node.active = true;
-        })
+        });
     }
 
 
@@ -148,6 +162,12 @@ export class Game_Vocabulary extends Component {
         this.labelGuild.string = `Ghép từ đúng với hình ảnh`;
         this.firstTouch = true;
         this.scenePhase3.active ? this.playAnimation(`Phase3`) : this.playAnimation(`Phase2`);
+        this.unschedule(this.gameTimer);
+
+        this.numTime = GameManager.defuseTime;
+        this.numScore = GameManager.defuseScore;
+        this.labelTime.string = GameManager.defuseTime.toString() + `s`;
+        this.labelScore.string = GameManager.defuseScore.toString();
 
         const pair = this.randomPairs(GameManager.data);
         if (!pair) return;
@@ -165,6 +185,7 @@ export class Game_Vocabulary extends Component {
     // Sinh ra các mask che đi từ khoá
     private generatePhase3() {
         this.scenePhase3.active = true;
+        this.clearPhase2();
         this.generatePhase2();
         this.labelPhase.string = `Phase 3: Guess`;
         this.labelGuild.string = `Mở từng phẩn của ảnh để đoán từ`;
@@ -190,12 +211,32 @@ export class Game_Vocabulary extends Component {
 
     //=============== XỬ LÝ LOGIC GAME ===============//
 
+    // Bộ đếm ngược
+    private lastTimestamp: number = 0; // Biến lưu trữ thời điểm cập nhật cuối cùng (tính theo mili-giây)
+    private gameTimer() {
+        const now = Date.now();
+        const deltaTime = (now - this.lastTimestamp) / 1000;
+
+        this.lastTimestamp = now;
+
+        // Giảm thời gian đếm ngược theo khoảng thời gian thực đã trôi qua
+        // this.numTime -= Math.floor(deltaTime);
+        this.numTime -= 1;
+        if (this.numTime <= 0) {
+            this.numTime = 0;
+            this.unschedule(this.gameTimer);
+        }
+        this.labelTime.string = this.numTime.toString() + `s`;
+    }
+
     // Xử lý khi bấm màn hình
     private onTouchStart(): void {
         if (this.firstTouch) {
             console.log("Chạm")
             this.firstTouch = false;
             this.stopAnimation();
+
+            this.schedule(this.gameTimer, 1);
         }
 
     }
@@ -236,10 +277,12 @@ export class Game_Vocabulary extends Component {
 
 
 
+
+
     //=============== XỬ LÝ ANIMATION ===============//
 
     // Xử lý hiệu ứng hình động
-    playAnimation(chil: string) {
+    private playAnimation(chil: string) {
         let node = this.animControler.getChildByPath(chil);
         node.active = true;
 
@@ -248,7 +291,7 @@ export class Game_Vocabulary extends Component {
             anim.play();
         }
     }
-    stopAnimation(): void {
+    private stopAnimation(): void {
         this.animControler.children.forEach(child => {
             child.active = false;
             const anim = child.getComponent(Animation);
@@ -313,9 +356,19 @@ export class Game_Vocabulary extends Component {
         tween(label)
             .repeat(4, // Lặp lại 4 lần
                 tween()
-                    .to(0.1, { color: new Color(0, 0, 0, 50) })
-                    .to(0.1, { color: new Color(0, 0, 0, 255) })
+                    .to(0.1, { color: new Color(255, 255, 255, 50) })
+                    .to(0.1, { color: new Color(255, 255, 255, 255) })
             )
+            .start();
+    }
+
+    // Hiệu ứng thu nhỏ dần
+    private shrinkEffect(node: Node) {
+        if (!node) return;
+        tween(node)
+            .to(0.3, { scale: new Vec3(0.01, 0.01, 0.01) }, { easing: "quadIn" })
+            .call(() => node.active = false)
+            .call(() => node.scale = new Vec3(1, 1, 1))
             .start();
     }
 
@@ -343,7 +396,8 @@ export class Game_Vocabulary extends Component {
             console.log("Hoàn thanh Phase 1");
 
             this.clearPhase1();
-            this.generatePhase2();
+            this.clearPhase2();
+            UIControler.instance.onOpen(null, `next`, () => this.generatePhase2());
         }
     }
 
@@ -353,6 +407,13 @@ export class Game_Vocabulary extends Component {
             this.imageAnswerID.shift();
             e.currentTarget.active = false;
 
+            this.unschedule(this.gameTimer);
+            if (this.numTime <= 0) {
+                this.numScore += 0;
+            } else {
+                this.numScore += ((this.numTime * 10) + GameManager.plusScore)
+            }
+            this.labelScore.string = this.numScore.toString();
 
             this.listHint.children.forEach(node => { node.active = false })
             this.scheduleOnce(() => {
@@ -363,15 +424,26 @@ export class Game_Vocabulary extends Component {
                 if (this.imageAnswerID.length > 0) {
                     let image = this.spriteFrameData.find(frame => frame.name.toLowerCase() === this.imageAnswerID[0].toLowerCase());
                     this.imageAnswer.getComponent(Sprite).spriteFrame = image;
+
+                    this.numTime = GameManager.defuseTime;
+                    this.labelTime.string = this.numTime.toString() + `s`;
+                    this.schedule(this.gameTimer, 1);
                 } else if (this.scenePhase3.active) {
                     console.log("Hoàn thanh Phase 3");
+                    this.numScore_P3 = this.numScore;
+
+                    UIControler.instance.onOpen(null, `over`);
+
                 } else {
                     console.log("Hoàn thanh Phase 2");
+                    this.numScore_P2 = this.numScore;
 
-                    this.clearPhase2();
-                    this.generatePhase3();
+                    UIControler.instance.onOpen(null, `next`, () => this.generatePhase3());
                 }
             })
+        } else {
+            this.numScore += GameManager.wrongScore;
+            this.labelScore.string = this.numScore.toString();
         }
     }
 
@@ -386,7 +458,8 @@ export class Game_Vocabulary extends Component {
         }
 
         const randomIndex = Math.floor(Math.random() * activeChildren.length);
-        activeChildren[randomIndex].active = false;
+        this.shrinkEffect(activeChildren[randomIndex]);
+        // activeChildren[randomIndex].active = false;
     }
 }
 
