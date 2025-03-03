@@ -4,6 +4,7 @@ import { DropZone } from './DropZone';
 import { DragItem } from './DragItem';
 import { LoadingScreen } from './LoadingScreen';
 import { UIControler } from './UIControler';
+import { NumberScrolling } from './NumberScrolling';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Vocabulary')
@@ -41,8 +42,8 @@ export class Game_Vocabulary extends Component {
     public imageAnswer: Node = null;
     @property({ type: Label, tooltip: "Thời gian 1 câu" })
     public labelTime: Label = null;
-    @property({ type: Label, tooltip: "Điểm phase đang chơi" })
-    public labelScore: Label = null;
+    @property({ type: NumberScrolling, tooltip: "Điểm phase đang chơi" })
+    public labelScore: NumberScrolling = null;
     @property({ type: Label, tooltip: "Câu trả lời đúng" })
     public labelResults: Label = null;
     @property({ type: Node, tooltip: "Node các câu trả lời" })
@@ -167,7 +168,7 @@ export class Game_Vocabulary extends Component {
         this.numTime = GameManager.defuseTime;
         this.numScore = GameManager.defuseScore;
         this.labelTime.string = GameManager.defuseTime.toString() + `s`;
-        this.labelScore.string = GameManager.defuseScore.toString();
+        this.labelScore.setValue(GameManager.defuseScore);
 
         const pair = this.randomPairs(GameManager.data);
         if (!pair) return;
@@ -373,6 +374,46 @@ export class Game_Vocabulary extends Component {
     }
 
 
+    // Hiệu ứng cộng điểm
+    private showBonusEffect(bonus: number, target?: Node) {
+        // Cache node vị trí ban đầu
+        const OFFSET_Y1 = 100;
+        const OFFSET_Y2 = 40;
+        const startPos = target ? target.getWorldPosition().clone() : this.labelScore.node.getWorldPosition().clone();
+
+        // Tính toán vị trí khởi tạo và vị trí mục tiêu dựa theo bonus
+        const initPos = bonus >= 0 ? startPos.clone().add(v3(0, -OFFSET_Y1, 0)) : startPos.clone().add(v3(0, -OFFSET_Y2, 0));
+        const targetPos = startPos.clone().add(v3(0, bonus >= 0 ? -OFFSET_Y2 : -OFFSET_Y1, 0));
+
+
+        // Tạo node bonus và gán parent
+        const bonusNode = new Node("BonusEffect");
+        bonusNode.parent = this.node;
+        bonusNode.setWorldPosition(initPos);
+
+        // Tạo Label cho node bonus
+        const bonusLabel = bonusNode.addComponent(Label);
+        bonusLabel.string = bonus >= 0 ? `+${bonus}` : `${bonus}`;
+        bonusLabel.color = bonus >= 0 ? new Color(0, 255, 0) : new Color(255, 0, 0);
+        bonusLabel.fontSize = 40;
+        bonusLabel.lineHeight = 50;
+        bonusLabel.isBold = true;
+        bonusLabel.enableOutline = true;
+        bonusLabel.outlineColor = new Color(255, 255, 255);
+        bonusLabel.enableShadow = true;
+        bonusLabel.shadowColor = new Color(56, 56, 56);
+
+        // Di chuyển node bonus từ vị trí khởi tạo đến vị trí mục tiêu
+        tween(bonusNode)
+            .to(0.8, { worldPosition: targetPos })
+            .call(() => {
+                bonusNode.destroy();
+            })
+            .start();
+    }
+
+
+
 
 
 
@@ -411,9 +452,11 @@ export class Game_Vocabulary extends Component {
             if (this.numTime <= 0) {
                 this.numScore += 0;
             } else {
-                this.numScore += ((this.numTime * 10) + GameManager.plusScore)
+                let numPlus = (this.numTime * 10) + GameManager.plusScore;
+                this.numScore += numPlus
+                this.showBonusEffect(numPlus);
             }
-            this.labelScore.string = this.numScore.toString();
+            this.labelScore.to(this.numScore);
 
             this.listHint.children.forEach(node => { node.active = false })
             this.scheduleOnce(() => {
@@ -443,7 +486,8 @@ export class Game_Vocabulary extends Component {
             })
         } else {
             this.numScore += GameManager.wrongScore;
-            this.labelScore.string = this.numScore.toString();
+            this.showBonusEffect(GameManager.wrongScore);
+            this.labelScore.to(this.numScore);
         }
     }
 
@@ -456,6 +500,10 @@ export class Game_Vocabulary extends Component {
             console.log("Đã mở hết Hint");
             return;
         }
+
+        this.numScore += GameManager.openHint;
+        this.showBonusEffect(GameManager.openHint);
+        this.labelScore.to(this.numScore);
 
         const randomIndex = Math.floor(Math.random() * activeChildren.length);
         this.shrinkEffect(activeChildren[randomIndex]);
