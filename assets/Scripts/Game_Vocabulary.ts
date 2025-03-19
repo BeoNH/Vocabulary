@@ -5,6 +5,7 @@ import { DragItem } from './DragItem';
 import { LoadingScreen } from './LoadingScreen';
 import { UIControler } from './UIControler';
 import { NumberScrolling } from './NumberScrolling';
+import { APIManager } from './API/APIManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Vocabulary')
@@ -57,6 +58,7 @@ export class Game_Vocabulary extends Component {
     public listHint: Node = null;
 
     private spriteFrameData: SpriteFrame[] = []; // hình ảnh từng ván chơi
+    private gameData: string[] = []; // Mảng các từ trong game
 
     private imageAnswerID: string[] = []; // Hình ảnh đáp án
     private firstTouch: boolean = true; // kiểm tra lần chạm đầu tiên mỗi Phase
@@ -69,6 +71,9 @@ export class Game_Vocabulary extends Component {
 
     onLoad() {
         Game_Vocabulary.Instance = this;
+
+        // Gọi mảng giọng đọc
+        speechSynthesis.getVoices();
     }
 
     start(): void {
@@ -93,14 +98,19 @@ export class Game_Vocabulary extends Component {
     //=============== kHỞI TẠO ĐẦU GAME ===============//
 
     // Khởi tạo dữ liệu đầu game
-    initGame() {
+    initGame(topic: string, data: any) {
         this.clearScene();
         this.clearPhase1();
-        LoadingScreen.Instance.loadResourceAsync('data/Color', SpriteFrame)
+
+        // Lấy danh sách tên resources cần load từ data
+        const resourceNames = data.map(item => `data/${topic}/${item}/spriteFrame`);
+
+        LoadingScreen.Instance.loadResourceAsync(resourceNames, SpriteFrame)
             .then((assets: SpriteFrame[]) => {
                 console.log('Loaded assets:', assets);
 
                 this.spriteFrameData = assets;
+                this.gameData = data;
 
                 this.generatePhase1();
             })
@@ -125,11 +135,11 @@ export class Game_Vocabulary extends Component {
     private generatePhase1() {
         this.scenePhase1.active = true;
         this.labelPhase.string = `Phase 1: Sort`;
-        this.labelGuild.string = `Ghép từ đúng với hình ảnh`;
+        this.labelGuild.string = `Match the word with the correct image.`;
         this.firstTouch = true;
         this.playAnimation(`Phase1`);
 
-        const pair = this.randomPairs(GameManager.data);
+        const pair = this.randomPairs(this.gameData);
         if (!pair) return;
 
         pair.forEach((e, i) => {
@@ -160,7 +170,7 @@ export class Game_Vocabulary extends Component {
     private generatePhase2() {
         this.scenePhase2.active = true;
         this.labelPhase.string = `Phase 2: Chosse`;
-        this.labelGuild.string = `Ghép từ đúng với hình ảnh`;
+        this.labelGuild.string = `Select the word based on the image.`;
         this.firstTouch = true;
         this.scenePhase3.active ? this.playAnimation(`Phase3`) : this.playAnimation(`Phase2`);
         this.unschedule(this.gameTimer);
@@ -170,7 +180,7 @@ export class Game_Vocabulary extends Component {
         this.labelTime.string = GameManager.defuseTime.toString() + `s`;
         this.labelScore.setValue(GameManager.defuseScore);
 
-        const pair = this.randomPairs(GameManager.data);
+        const pair = this.randomPairs(this.gameData);
         if (!pair) return;
 
         pair.forEach((e, i) => {
@@ -178,9 +188,11 @@ export class Game_Vocabulary extends Component {
             this.listAnswer.children[i].getChildByName(`Label`).getComponent(Label).string = e.word;
         })
 
-        this.imageAnswerID = this.shuffleArray(GameManager.data);
+        this.imageAnswerID = this.shuffleArray(this.gameData);
         let image = this.spriteFrameData.find(frame => frame.name.toLowerCase() === this.imageAnswerID[0].toLowerCase());
         this.imageAnswer.getComponent(Sprite).spriteFrame = image;
+
+        this.labelResults.string = this.convertToUnderscore(this.imageAnswerID[0]);
     }
 
     // Sinh ra các mask che đi từ khoá
@@ -189,7 +201,7 @@ export class Game_Vocabulary extends Component {
         this.clearPhase2();
         this.generatePhase2();
         this.labelPhase.string = `Phase 3: Guess`;
-        this.labelGuild.string = `Mở từng phẩn của ảnh để đoán từ`;
+        this.labelGuild.string = `Open each part of the image to guess the word.`;
         this.listHint.children.forEach(node => { node.active = true })
     }
 
@@ -203,6 +215,7 @@ export class Game_Vocabulary extends Component {
         this.labelGuild.string = `?????`;
         this.labelResults.string = `. . . . .`;
 
+        this.gameData = [];
         this.spriteFrameData = [];
         this.imageAnswerID = [];
     }
@@ -276,6 +289,34 @@ export class Game_Vocabulary extends Component {
         return arr;
     }
 
+    // Dùng API Google để đọc text
+    onReadWord(txt: string) {
+        if (window.speechSynthesis) {
+            const msg = new SpeechSynthesisUtterance(txt);
+            msg.voice = speechSynthesis.getVoices()[6]; // Giọng đọc
+            msg.lang = 'en-US'; // Ngôn ngữ tiếng Anh
+            msg.volume = 1; // Âm lượng (0-1)
+            msg.rate = 0.8; // Tốc độ đọc (0.1-10)
+            msg.pitch = 1; // Độ cao giọng (0-2)
+            window.speechSynthesis.speak(msg);
+        } else {
+            console.error("SpeechSynthesis không được hỗ trợ trên nền tảng này!");
+        }
+    }
+
+    // Chuyển đáp án sang ký tự trống
+    convertToUnderscore(input: string): string {
+        let output = '';
+        for (const char of input) {
+            if (char === ' ') {
+                output += '  ';
+            } else {
+                output += '_ ';
+            }
+        }
+        return output.trim();
+    }
+
 
 
 
@@ -308,11 +349,14 @@ export class Game_Vocabulary extends Component {
 
     // Chạy text khi chọn đúng đáp án
     private currentTween: Tween<Node> = null;
-    private correctAnswer(txt: string, cb: Function) {
+    private correctAnswer(txt: string, target: Node, cb: Function) {
         if (!this.labelResults) return;
 
         let labelNode = this.labelResults.node;
-        this.labelResults.string = txt;
+        const startPos = target.worldPosition.clone();
+        const targetPos = labelNode.worldPosition.clone();
+
+
 
         if (this.currentTween) {
             this.currentTween.stop();
@@ -325,6 +369,13 @@ export class Game_Vocabulary extends Component {
         // Tạo tween mới
         this.maskWaitAnimRun.active = true;
         this.currentTween = tween(labelNode)
+            .call(() => {
+                this.labelResults.string = txt;
+                labelNode.worldPosition = startPos;
+                this.labelResults.color = new Color(144, 172, 217);
+            })
+            .to(0.2, { worldPosition: targetPos })
+            .call(() => this.labelResults.color = originalColor)
             .to(0.2, { scale: new Vec3(1.2, 1.2, 1) })
             .call(() => this.shakeEffect(labelNode))
             .to(0.8, { scale: originalScale })
@@ -332,7 +383,6 @@ export class Game_Vocabulary extends Component {
             .call(() => {
                 this.labelResults.color = originalColor;
                 this.currentTween = null;
-                this.labelResults.string = `. . . . .`;
                 this.maskWaitAnimRun.active = false;
                 cb();
             })
@@ -412,8 +462,18 @@ export class Game_Vocabulary extends Component {
             .start();
     }
 
-
-
+    // Gọi lưu điểm lên sever
+    private saveScore(score: number) {
+        const url = `/imageToWord/saveScore`;
+        const data = {
+            "username": APIManager.userDATA?.username,
+            "score": score,
+            "time": 0
+        };
+        APIManager.requestData(`POST`, url, data, res => {
+            console.log("Kết thúc game => Gửi server:", data, res);
+        });
+    }
 
 
 
@@ -438,13 +498,14 @@ export class Game_Vocabulary extends Component {
 
             this.clearPhase1();
             this.clearPhase2();
-            UIControler.instance.onOpen(null, `next`, () => this.generatePhase2());
+            UIControler.instance.onOpen(null, `nextP2`, () => this.generatePhase2());
         }
     }
 
     onAnswerClick(e: EventTouch, txt: string) {
         this.onTouchStart();
         if (this.imageAnswerID.length > 0 && txt === this.imageAnswerID[0]) {
+            this.onReadWord(txt);
             this.imageAnswerID.shift();
             e.currentTarget.active = false;
 
@@ -463,25 +524,27 @@ export class Game_Vocabulary extends Component {
                 this.listHint.children.forEach(node => { node.active = true })
             }, 1)
 
-            this.correctAnswer(txt, () => {
+            this.correctAnswer(txt, e.currentTarget, () => {
                 if (this.imageAnswerID.length > 0) {
                     let image = this.spriteFrameData.find(frame => frame.name.toLowerCase() === this.imageAnswerID[0].toLowerCase());
                     this.imageAnswer.getComponent(Sprite).spriteFrame = image;
 
                     this.numTime = GameManager.defuseTime;
                     this.labelTime.string = this.numTime.toString() + `s`;
+                    this.labelResults.string = this.convertToUnderscore(this.imageAnswerID[0]);
                     this.schedule(this.gameTimer, 1);
                 } else if (this.scenePhase3.active) {
                     console.log("Hoàn thanh Phase 3");
-                    this.numScore_P3 = this.numScore;
+                    this.numScore_P3 = this.numScore + this.numScore_P2;
 
-                    UIControler.instance.onOpen(null, `over`);
+                    this.saveScore(this.numScore_P3);
+                    UIControler.instance.onOpen(null, `over`, null, this.numScore_P3);
 
                 } else {
                     console.log("Hoàn thanh Phase 2");
                     this.numScore_P2 = this.numScore;
 
-                    UIControler.instance.onOpen(null, `next`, () => this.generatePhase3());
+                    UIControler.instance.onOpen(null, `nextP3`, () => this.generatePhase3(), this.numScore_P2);
                 }
             })
         } else {

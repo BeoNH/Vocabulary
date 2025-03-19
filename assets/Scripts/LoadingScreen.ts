@@ -1,4 +1,4 @@
-import { _decorator, Component, director, Label, Node, resources, SpriteFrame } from 'cc';
+import { _decorator, Asset, Component, director, Label, Node, resources, SpriteFrame } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadingScreen')
@@ -16,25 +16,39 @@ export class LoadingScreen extends Component {
         this.loadScene.active = false;
     }
 
-    loadResourceAsync(path: string, type: any): Promise<any[]> {
+    loadResourceAsync(paths: string[], type: typeof Asset): Promise<any[]> {
         return new Promise((resolve, reject) => {
             this.loadScene.active = true;
-            resources.loadDir(path, type, (completedCount, totalCount, item) => {
-                const progress = totalCount > 0 ? completedCount / totalCount : 0;
-                if (this.progressLabel) {
-                    this.progressLabel.string = `Loading: ${Math.floor(progress * 100)}%`;
-                }
-            }, (err, assets) => {
-                // trễ lại 1 nhịp
-                this.scheduleOnce(()=>{
-                    this.loadScene.active = false;
-                },0.5)
+            const loadedAssets: any[] = [];
+            let completedLoads = 0;
 
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(assets);
-                }
+            // Cập nhật label progress
+            this.progressLabel.string = `Loading: . . .`;
+
+            // Load từng resource một
+            paths.forEach((path, index) => {
+                resources.load(path, type, (err, asset) => {
+                    completedLoads++;
+
+                    if (err) {
+                        console.error(`Failed to load ${path}:`, err);
+                    } else {
+                        loadedAssets.push(asset);
+                    }
+
+                    // Kiểm tra đã load xong tất cả chưa
+                    if (completedLoads === paths.length) {
+                        // trễ lại 1 nhịp
+                        this.scheduleOnce(() => {
+                            this.loadScene.active = false;
+                        }, 0.5)
+                        if (loadedAssets.length > 0) {
+                            resolve(loadedAssets);
+                        } else {
+                            reject(new Error('No assets were loaded successfully'));
+                        }
+                    }
+                });
             });
         });
     }

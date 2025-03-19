@@ -2,5 +2,64 @@
   "__version__": "1.3.7",
   "log": {
     "level": 4
+  },
+  "common": {
+    "polyfills": {
+      "asyncFunctions": true
+    },
+    "buildPath": "project://build",
+    "outputName": "web-mobile",
+    "mainBundleCompressionType": "merge_dep",
+    "platform": "web-mobile",
+    "md5Cache": true
+  },
+  "BuildTaskManager": {
+    "taskMap": {
+      "1741051120649": {
+        "type": "build",
+        "id": "1741051120649",
+        "progress": 1,
+        "state": "success",
+        "stage": "build",
+        "message": "3-19-2025 10:00:32 build success in 14 s!",
+        "options": {
+          "name": "Vocabulary",
+          "server": "",
+          "platform": "web-mobile",
+          "buildPath": "project://build",
+          "debug": false,
+          "md5Cache": true,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "polyfills": {
+            "asyncFunctions": true
+          },
+          "experimentalEraseModules": false,
+          "startSceneAssetBundle": false,
+          "bundleConfigs": [],
+          "useBuiltinServer": false,
+          "mainBundleIsRemote": false,
+          "mainBundleCompressionType": "merge_dep",
+          "useSplashScreen": true,
+          "bundleCommonChunk": false,
+          "packAutoAtlas": true,
+          "startScene": "f30ae949-c71f-45a0-acd1-f75fabcba328",
+          "outputName": "web-mobile",
+          "taskName": "web-mobile",
+          "scenes": [
+            {
+              "url": "db://assets/GamePlay.scene",
+              "uuid": "f30ae949-c71f-45a0-acd1-f75fabcba328"
+            }
+          ],
+          "packages": {},
+          "__version__": "1.3.7",
+          "buildMode": "normal",
+          "logDest": "project://temp/builder/log/web-mobile3-4-2025 08-18.log"
+        },
+        "time": "3-19-2025 10:00:17",
+        "dirty": false
+      }
+    }
   }
 }

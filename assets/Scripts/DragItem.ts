@@ -83,18 +83,30 @@ export class DragItem extends Component {
 
     // Khi kết thúc kéo, thiết lập lại parent và căn chỉnh vị trí
     private onTouchEnd(event: EventTouch) {
-        if (this.currentParent) {
-            this.node.parent = this.currentParent;
-            this.node.setSiblingIndex(Math.max(0, this.currentParent.children.length - 2))
-            const dropZoneComp = this.currentParent.getComponent(DropZone);
-            if (dropZoneComp && dropZoneComp.zoneId === this.correctZoneId) {
-                this.doneDrag();
-                console.log(`Thả đúng zoneId = ${dropZoneComp.zoneId}`);
-            } else {
-                console.log('Thả sai zone');
-            }
-            this.node.setWorldPosition(dropZoneComp.zoneWPos.worldPosition);
+        if (!this.currentParent) {
+            this.currentParent = null;
+            return;
         }
+
+        this.node.parent = this.currentParent;
+        this.node.setSiblingIndex(Math.max(0, this.currentParent.children.length - 2));
+
+        const dropZoneComp = this.currentParent.getComponent(DropZone);
+        if (!dropZoneComp) {
+            this.currentParent = null;
+            return;
+        }
+
+        this.node.setWorldPosition(dropZoneComp.zoneWPos.worldPosition);
+
+        if (dropZoneComp.zoneId === this.correctZoneId) {
+            this.doneDrag();
+            Game_Vocabulary.Instance.onReadWord(dropZoneComp.zoneId);
+            console.log(`Thả đúng zoneId = ${dropZoneComp.zoneId}`);
+        } else {
+            console.log('Thả sai zone');
+        }
+
         Game_Vocabulary.Instance.checkCorrectPhase1();
         this.currentParent = null;
     }

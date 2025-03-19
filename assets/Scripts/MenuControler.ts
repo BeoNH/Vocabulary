@@ -4,14 +4,17 @@ const { ccclass, property } = _decorator;
 
 @ccclass('MenuControler')
 export class MenuControler extends Component {
+    public static Instance: MenuControler;
+
     @property({ type: Label, tooltip: "Tên Chủ đề" })
     public labelToppic: Label = null;
     @property({ type: Node, tooltip: "Ảnh theo chủ đề" })
     public listImageToppic: Node = null;
 
-    private numToppic: number = 0; // chỉ số chủ đề đang được hiển thị
+    numToppic: number = 0; // chỉ số chủ đề đang được hiển thị
 
     protected onLoad(): void {
+        MenuControler.Instance = this;
         this.updateTopicDisplay();
     }
 
