@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "215175d6-66ff-4c01-9224-90ad95557723",
+  "uuid": "8b59e7ac-dff9-4064-b05c-770a54b9c288",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "215175d6-66ff-4c01-9224-90ad95557723@6c48a",
-      "displayName": "Tandem Bike",
+      "uuid": "8b59e7ac-dff9-4064-b05c-770a54b9c288@6c48a",
+      "displayName": "Tandem bike",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "215175d6-66ff-4c01-9224-90ad95557723",
+        "imageUuidOrDatabaseUri": "8b59e7ac-dff9-4064-b05c-770a54b9c288",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "215175d6-66ff-4c01-9224-90ad95557723@f9941",
-      "displayName": "Tandem Bike",
+      "uuid": "8b59e7ac-dff9-4064-b05c-770a54b9c288@f9941",
+      "displayName": "Tandem bike",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "215175d6-66ff-4c01-9224-90ad95557723@6c48a",
+        "imageUuidOrDatabaseUri": "8b59e7ac-dff9-4064-b05c-770a54b9c288@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "215175d6-66ff-4c01-9224-90ad95557723@f9941"
+    "redirect": "8b59e7ac-dff9-4064-b05c-770a54b9c288@f9941"
   }
 }

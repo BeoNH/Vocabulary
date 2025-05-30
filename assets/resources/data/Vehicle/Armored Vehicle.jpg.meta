@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "be9f82db-50a1-460b-9b92-7cdad052e46b",
+  "uuid": "bf1da3b3-5e07-41cd-bec3-cace63e3b60c",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "be9f82db-50a1-460b-9b92-7cdad052e46b@6c48a",
-      "displayName": "Armored Vehicle",
+      "uuid": "bf1da3b3-5e07-41cd-bec3-cace63e3b60c@6c48a",
+      "displayName": "Armored vehicle",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "be9f82db-50a1-460b-9b92-7cdad052e46b",
+        "imageUuidOrDatabaseUri": "bf1da3b3-5e07-41cd-bec3-cace63e3b60c",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "be9f82db-50a1-460b-9b92-7cdad052e46b@f9941",
-      "displayName": "Armored Vehicle",
+      "uuid": "bf1da3b3-5e07-41cd-bec3-cace63e3b60c@f9941",
+      "displayName": "Armored vehicle",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "be9f82db-50a1-460b-9b92-7cdad052e46b@6c48a",
+        "imageUuidOrDatabaseUri": "bf1da3b3-5e07-41cd-bec3-cace63e3b60c@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "be9f82db-50a1-460b-9b92-7cdad052e46b@f9941"
+    "redirect": "bf1da3b3-5e07-41cd-bec3-cace63e3b60c@f9941"
   }
 }

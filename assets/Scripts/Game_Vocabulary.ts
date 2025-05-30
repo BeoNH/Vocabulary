@@ -174,6 +174,7 @@ export class Game_Vocabulary extends Component {
         this.firstTouch = true;
         this.scenePhase3.active ? this.playAnimation(`Phase3`) : this.playAnimation(`Phase2`);
         this.unschedule(this.gameTimer);
+        this.schedule(this.gameTimer, 1);
 
         this.numTime = GameManager.defuseTime;
         this.numScore = GameManager.defuseScore;
@@ -249,8 +250,6 @@ export class Game_Vocabulary extends Component {
             console.log("Chạm")
             this.firstTouch = false;
             this.stopAnimation();
-
-            this.schedule(this.gameTimer, 1);
         }
 
     }
@@ -548,7 +547,7 @@ export class Game_Vocabulary extends Component {
                 }
             })
         } else {
-            this.numScore += GameManager.wrongScore;
+            this.numScore = Math.max(0, this.numScore + GameManager.wrongScore);
             this.showBonusEffect(GameManager.wrongScore);
             this.labelScore.to(this.numScore);
         }

@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "64222fea-370b-44dc-9442-960efaa0145c",
+  "uuid": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "64222fea-370b-44dc-9442-960efaa0145c@6c48a",
-      "displayName": "Noodle",
+      "uuid": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b@6c48a",
+      "displayName": "Fried eggs",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "64222fea-370b-44dc-9442-960efaa0145c",
+        "imageUuidOrDatabaseUri": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "64222fea-370b-44dc-9442-960efaa0145c@f9941",
-      "displayName": "Noodle",
+      "uuid": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b@f9941",
+      "displayName": "Fried eggs",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "64222fea-370b-44dc-9442-960efaa0145c@6c48a",
+        "imageUuidOrDatabaseUri": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "64222fea-370b-44dc-9442-960efaa0145c@f9941"
+    "redirect": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b@f9941"
   }
 }

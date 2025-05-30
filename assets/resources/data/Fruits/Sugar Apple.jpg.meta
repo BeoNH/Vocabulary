@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "3563ceba-103a-49db-97f8-8070a8065e3c",
+  "uuid": "31d0ac06-1513-4bff-9e21-57694ad875e5",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "3563ceba-103a-49db-97f8-8070a8065e3c@6c48a",
-      "displayName": "Sugar Apple",
+      "uuid": "31d0ac06-1513-4bff-9e21-57694ad875e5@6c48a",
+      "displayName": "Sugar apple",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "3563ceba-103a-49db-97f8-8070a8065e3c",
+        "imageUuidOrDatabaseUri": "31d0ac06-1513-4bff-9e21-57694ad875e5",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "3563ceba-103a-49db-97f8-8070a8065e3c@f9941",
-      "displayName": "Sugar Apple",
+      "uuid": "31d0ac06-1513-4bff-9e21-57694ad875e5@f9941",
+      "displayName": "Sugar apple",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "3563ceba-103a-49db-97f8-8070a8065e3c@6c48a",
+        "imageUuidOrDatabaseUri": "31d0ac06-1513-4bff-9e21-57694ad875e5@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "3563ceba-103a-49db-97f8-8070a8065e3c@f9941"
+    "redirect": "31d0ac06-1513-4bff-9e21-57694ad875e5@f9941"
   }
 }

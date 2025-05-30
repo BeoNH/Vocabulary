@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "1dc0a7fa-5fe2-4fae-a774-c4d14790f1ae",
+  "uuid": "d133eaf6-d4a1-4b9c-b7a1-cd92955f9969",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1dc0a7fa-5fe2-4fae-a774-c4d14790f1ae@6c48a",
-      "displayName": "Hot Air Balloon",
+      "uuid": "d133eaf6-d4a1-4b9c-b7a1-cd92955f9969@6c48a",
+      "displayName": "Hot air balloon",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "1dc0a7fa-5fe2-4fae-a774-c4d14790f1ae",
+        "imageUuidOrDatabaseUri": "d133eaf6-d4a1-4b9c-b7a1-cd92955f9969",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1dc0a7fa-5fe2-4fae-a774-c4d14790f1ae@f9941",
-      "displayName": "Hot Air Balloon",
+      "uuid": "d133eaf6-d4a1-4b9c-b7a1-cd92955f9969@f9941",
+      "displayName": "Hot air balloon",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1dc0a7fa-5fe2-4fae-a774-c4d14790f1ae@6c48a",
+        "imageUuidOrDatabaseUri": "d133eaf6-d4a1-4b9c-b7a1-cd92955f9969@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "1dc0a7fa-5fe2-4fae-a774-c4d14790f1ae@f9941"
+    "redirect": "d133eaf6-d4a1-4b9c-b7a1-cd92955f9969@f9941"
   }
 }

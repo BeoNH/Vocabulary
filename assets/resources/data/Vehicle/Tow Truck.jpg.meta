@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "8116e286-9a7b-42af-bfab-bd12cad727ea",
+  "uuid": "5aaec39d-2e57-4ab5-bce7-5ad2e848ac03",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "8116e286-9a7b-42af-bfab-bd12cad727ea@6c48a",
-      "displayName": "Tow Truck",
+      "uuid": "5aaec39d-2e57-4ab5-bce7-5ad2e848ac03@6c48a",
+      "displayName": "Tow truck",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "8116e286-9a7b-42af-bfab-bd12cad727ea",
+        "imageUuidOrDatabaseUri": "5aaec39d-2e57-4ab5-bce7-5ad2e848ac03",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "8116e286-9a7b-42af-bfab-bd12cad727ea@f9941",
-      "displayName": "Tow Truck",
+      "uuid": "5aaec39d-2e57-4ab5-bce7-5ad2e848ac03@f9941",
+      "displayName": "Tow truck",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "8116e286-9a7b-42af-bfab-bd12cad727ea@6c48a",
+        "imageUuidOrDatabaseUri": "5aaec39d-2e57-4ab5-bce7-5ad2e848ac03@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "8116e286-9a7b-42af-bfab-bd12cad727ea@f9941"
+    "redirect": "5aaec39d-2e57-4ab5-bce7-5ad2e848ac03@f9941"
   }
 }

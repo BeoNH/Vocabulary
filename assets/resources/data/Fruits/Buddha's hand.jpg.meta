@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "f139ffff-083c-4a30-93e2-50f382efe657",
+  "uuid": "98380567-3ff8-4c8c-a68a-67b88ebfddb3",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "f139ffff-083c-4a30-93e2-50f382efe657@6c48a",
-      "displayName": "Amphibious",
+      "uuid": "98380567-3ff8-4c8c-a68a-67b88ebfddb3@6c48a",
+      "displayName": "Buddha's hand",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "f139ffff-083c-4a30-93e2-50f382efe657",
+        "imageUuidOrDatabaseUri": "98380567-3ff8-4c8c-a68a-67b88ebfddb3",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "f139ffff-083c-4a30-93e2-50f382efe657@f9941",
-      "displayName": "Amphibious",
+      "uuid": "98380567-3ff8-4c8c-a68a-67b88ebfddb3@f9941",
+      "displayName": "Buddha's hand",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f139ffff-083c-4a30-93e2-50f382efe657@6c48a",
+        "imageUuidOrDatabaseUri": "98380567-3ff8-4c8c-a68a-67b88ebfddb3@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "f139ffff-083c-4a30-93e2-50f382efe657@f9941"
+    "redirect": "98380567-3ff8-4c8c-a68a-67b88ebfddb3@f9941"
   }
 }

@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "1e254bcc-8cf1-46cf-bd59-78324a3b23d4",
+  "uuid": "3d381b77-847a-4b0b-9de4-2a126b958243",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1e254bcc-8cf1-46cf-bd59-78324a3b23d4@6c48a",
-      "displayName": "Road Roller",
+      "uuid": "3d381b77-847a-4b0b-9de4-2a126b958243@6c48a",
+      "displayName": "Road roller",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "1e254bcc-8cf1-46cf-bd59-78324a3b23d4",
+        "imageUuidOrDatabaseUri": "3d381b77-847a-4b0b-9de4-2a126b958243",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1e254bcc-8cf1-46cf-bd59-78324a3b23d4@f9941",
-      "displayName": "Road Roller",
+      "uuid": "3d381b77-847a-4b0b-9de4-2a126b958243@f9941",
+      "displayName": "Road roller",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1e254bcc-8cf1-46cf-bd59-78324a3b23d4@6c48a",
+        "imageUuidOrDatabaseUri": "3d381b77-847a-4b0b-9de4-2a126b958243@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "1e254bcc-8cf1-46cf-bd59-78324a3b23d4@f9941"
+    "redirect": "3d381b77-847a-4b0b-9de4-2a126b958243@f9941"
   }
 }

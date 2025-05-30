@@ -2,22 +2,22 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b",
+  "uuid": "4f4bdb4a-1502-4b49-b4b7-4a0c1c604b2b",
   "files": [
-    ".jpg",
-    ".json"
+    ".json",
+    ".png"
   ],
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b@6c48a",
-      "displayName": "Fried egg",
+      "uuid": "4f4bdb4a-1502-4b49-b4b7-4a0c1c604b2b@6c48a",
+      "displayName": "Group 49",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b",
+        "imageUuidOrDatabaseUri": "4f4bdb4a-1502-4b49-b4b7-4a0c1c604b2b",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b@f9941",
-      "displayName": "Fried egg",
+      "uuid": "4f4bdb4a-1502-4b49-b4b7-4a0c1c604b2b@f9941",
+      "displayName": "Group 49",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -46,10 +46,10 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 2048,
-        "height": 2048,
-        "rawWidth": 2048,
-        "rawHeight": 2048,
+        "width": 487,
+        "height": 489,
+        "rawWidth": 487,
+        "rawHeight": 489,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -61,17 +61,17 @@
         "meshType": 0,
         "vertices": {
           "rawPosition": [
-            -1024,
-            -1024,
+            -243.5,
+            -244.5,
             0,
-            1024,
-            -1024,
+            243.5,
+            -244.5,
             0,
-            -1024,
-            1024,
+            -243.5,
+            244.5,
             0,
-            1024,
-            1024,
+            243.5,
+            244.5,
             0
           ],
           "indexes": [
@@ -84,12 +84,12 @@
           ],
           "uv": [
             0,
-            2048,
-            2048,
-            2048,
+            489,
+            487,
+            489,
             0,
             0,
-            2048,
+            487,
             0
           ],
           "nuv": [
@@ -103,18 +103,18 @@
             1
           ],
           "minPos": [
-            -1024,
-            -1024,
+            -243.5,
+            -244.5,
             0
           ],
           "maxPos": [
-            1024,
-            1024,
+            243.5,
+            244.5,
             0
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b@6c48a",
+        "imageUuidOrDatabaseUri": "4f4bdb4a-1502-4b49-b4b7-4a0c1c604b2b@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -127,8 +127,8 @@
   },
   "userData": {
     "type": "sprite-frame",
-    "hasAlpha": false,
+    "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "ade203c1-ad93-41e4-9c4a-1b73d9c2986b@f9941"
+    "redirect": "4f4bdb4a-1502-4b49-b4b7-4a0c1c604b2b@f9941"
   }
 }

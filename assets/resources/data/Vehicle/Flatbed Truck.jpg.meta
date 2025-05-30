@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "1444b9ee-8008-43e6-9566-eefbed7f24e4",
+  "uuid": "1011ced7-ce23-42e1-b49a-72eddc6bd938",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1444b9ee-8008-43e6-9566-eefbed7f24e4@6c48a",
-      "displayName": "Flatbed Truck",
+      "uuid": "1011ced7-ce23-42e1-b49a-72eddc6bd938@6c48a",
+      "displayName": "Flatbed truck",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "1444b9ee-8008-43e6-9566-eefbed7f24e4",
+        "imageUuidOrDatabaseUri": "1011ced7-ce23-42e1-b49a-72eddc6bd938",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1444b9ee-8008-43e6-9566-eefbed7f24e4@f9941",
-      "displayName": "Flatbed Truck",
+      "uuid": "1011ced7-ce23-42e1-b49a-72eddc6bd938@f9941",
+      "displayName": "Flatbed truck",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1444b9ee-8008-43e6-9566-eefbed7f24e4@6c48a",
+        "imageUuidOrDatabaseUri": "1011ced7-ce23-42e1-b49a-72eddc6bd938@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "1444b9ee-8008-43e6-9566-eefbed7f24e4@f9941"
+    "redirect": "1011ced7-ce23-42e1-b49a-72eddc6bd938@f9941"
   }
 }

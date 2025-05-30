@@ -1,0 +1,1 @@
+pngquant --quality=50-70 -f --ext .jpg ../build/web-mobile/**/*.jpg --speed 5

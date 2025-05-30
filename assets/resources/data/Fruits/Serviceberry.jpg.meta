@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "4c10a0cf-5b1f-4fe6-afc6-e4ed17fd1667",
+  "uuid": "2750fc5e-ea9c-4a25-9f4d-b4a0202804cb",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "4c10a0cf-5b1f-4fe6-afc6-e4ed17fd1667@6c48a",
-      "displayName": "Semi truck",
+      "uuid": "2750fc5e-ea9c-4a25-9f4d-b4a0202804cb@6c48a",
+      "displayName": "Serviceberry",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "4c10a0cf-5b1f-4fe6-afc6-e4ed17fd1667",
+        "imageUuidOrDatabaseUri": "2750fc5e-ea9c-4a25-9f4d-b4a0202804cb",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "4c10a0cf-5b1f-4fe6-afc6-e4ed17fd1667@f9941",
-      "displayName": "Semi truck",
+      "uuid": "2750fc5e-ea9c-4a25-9f4d-b4a0202804cb@f9941",
+      "displayName": "Serviceberry",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "4c10a0cf-5b1f-4fe6-afc6-e4ed17fd1667@6c48a",
+        "imageUuidOrDatabaseUri": "2750fc5e-ea9c-4a25-9f4d-b4a0202804cb@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": false,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "4c10a0cf-5b1f-4fe6-afc6-e4ed17fd1667@f9941"
+    "redirect": "2750fc5e-ea9c-4a25-9f4d-b4a0202804cb@f9941"
   }
 }

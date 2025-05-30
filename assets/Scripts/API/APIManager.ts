@@ -55,15 +55,17 @@ export class APIManager extends Component {
 
         xhr.onreadystatechange = () => {
             if (xhr.readyState != 4) return;
-            if (xhr.status == 200 && xhr.responseText) {
-                var response = JSON.parse(xhr.responseText);
-                console.log(`Call.${method}=>`, url, "\n", response);
+            if (xhr.responseText) {
+                const response = JSON.parse(xhr.responseText);
+                if (xhr.status === 200 || xhr.status === 201) {
+                    console.log(`Call.${method}=>`, url, "\n", response);
+                    callback(response);
+                } else {
+                    callback(null);
+                }
+            } else {
+                callback(null);
             }
-            if (xhr.status == 201 && xhr.responseText) {
-                response = JSON.parse(xhr.responseText);
-                response.error = xhr.status;
-            }
-            callback(response);
         };
         xhr.open(method, url, true);
         callbackHeader(xhr);
