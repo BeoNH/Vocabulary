@@ -7,9 +7,10 @@
       },
       "buildPath": "project://build",
       "outputName": "web-mobile",
-      "mainBundleCompressionType": "merge_dep",
+      "mainBundleCompressionType": "merge_all_json",
       "platform": "web-mobile",
-      "md5Cache": true
+      "md5Cache": true,
+      "startScene": "bff61bad-6637-492e-8415-4cc0843e6b0c"
     },
     "taskOptionsMap": {
       "1741051120649": {

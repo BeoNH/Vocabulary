@@ -9,9 +9,10 @@
     },
     "buildPath": "project://build",
     "outputName": "web-mobile",
-    "mainBundleCompressionType": "merge_dep",
+    "mainBundleCompressionType": "merge_all_json",
     "platform": "web-mobile",
-    "md5Cache": true
+    "md5Cache": true,
+    "startScene": "bff61bad-6637-492e-8415-4cc0843e6b0c"
   },
   "BuildTaskManager": {
     "taskMap": {
@@ -21,7 +22,7 @@
         "progress": 1,
         "state": "success",
         "stage": "build",
-        "message": "5-29-2025 10:36:36 build success in 34 s!",
+        "message": "7-25-2025 17:03:58 build success in 27 s!",
         "options": {
           "name": "Vocabulary",
           "server": "",
@@ -39,17 +40,21 @@
           "bundleConfigs": [],
           "useBuiltinServer": false,
           "mainBundleIsRemote": false,
-          "mainBundleCompressionType": "merge_dep",
+          "mainBundleCompressionType": "merge_all_json",
           "useSplashScreen": true,
           "bundleCommonChunk": false,
           "packAutoAtlas": true,
-          "startScene": "f30ae949-c71f-45a0-acd1-f75fabcba328",
+          "startScene": "bff61bad-6637-492e-8415-4cc0843e6b0c",
           "outputName": "web-mobile",
           "taskName": "web-mobile",
           "scenes": [
             {
               "url": "db://assets/GamePlay.scene",
               "uuid": "f30ae949-c71f-45a0-acd1-f75fabcba328"
+            },
+            {
+              "url": "db://assets/Loading.scene",
+              "uuid": "bff61bad-6637-492e-8415-4cc0843e6b0c"
             }
           ],
           "packages": {},
@@ -57,7 +62,7 @@
           "buildMode": "normal",
           "logDest": "project://temp/builder/log/web-mobile3-4-2025 08-18.log"
         },
-        "time": "5-29-2025 10:36:01",
+        "time": "7-25-2025 17:03:31",
         "dirty": false
       }
     }

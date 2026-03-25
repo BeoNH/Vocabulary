@@ -20,7 +20,7 @@ export class PopupRank extends Component {
 
     // Khởi tạo bảng
     initRankingList() {
-        const url = `/imageToWord/getRankList`;
+        const url = `/getRankList`;
         const data = {
             "username": APIManager.userDATA?.username,
             // "username": "beonh123",

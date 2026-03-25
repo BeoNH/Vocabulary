@@ -463,7 +463,7 @@ export class Game_Vocabulary extends Component {
 
     // Gọi lưu điểm lên sever
     private saveScore(score: number) {
-        const url = `/imageToWord/saveScore`;
+        const url = `/saveScore`;
         const data = {
             "username": APIManager.userDATA?.username,
             "score": score,

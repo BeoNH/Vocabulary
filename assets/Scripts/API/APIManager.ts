@@ -12,8 +12,9 @@ export class APIManager extends Component {
     public static service = SERVICE_ASSETS.ELSA;
 
     public static urlAPI: string = "https://api-tele.gamebatta.com";// batta
-    public static urlBATTA: string = "https://apiwordpuzzle-tele.gamebatta.com";// sever game batta
-    public static urlELSA: string = "https://apiwordpuzzle-mytel.elsapro.net";// sever game elsa
+    public static urlBATTA: string = "https://apiwordpuzzle-tele.gamebatta.com/api-minigame";// sever game batta
+    public static urlELSA: string = APIManager.urlParam(`url_api_stu`) || "https://apiwordpuzzle-mytel.elsapro.net/api-minigame";// sever game elsa
+    // public static urlELSA: string = "https://apiwordpuzzle-tele.gamebatta.com/api-minigame";// sever game elsa
 
     // public static sessionID;
     public static userDATA: {
@@ -23,11 +24,10 @@ export class APIManager extends Component {
     } = {};
 
     public static requestData(method: string, key: string, data: any, callBack: (response: any) => void) {
-        const urlMapping: { [key in SERVICE_ASSETS]: string } = {
-            [SERVICE_ASSETS.BATTA]: APIManager.urlBATTA,
-            [SERVICE_ASSETS.ELSA]: APIManager.urlELSA,
-        };
-        const url = urlMapping[APIManager.service] + key;
+        let url = APIManager.urlParam("url_api") == "api-mm.lingox.co"
+            ? APIManager.urlELSA :
+            (APIManager.urlParam(`url_api_stu`) || APIManager.urlBATTA);
+        url += key;
 
         APIManager.CallRequest(method, data, url, (response) => {
             callBack(response);
@@ -71,7 +71,12 @@ export class APIManager extends Component {
         callbackHeader(xhr);
         let body
         if (data != null)
-            body = JSON.stringify(data);
+            body = JSON.stringify({
+                ...data,
+                "source": APIManager.urlParam("url_api"),
+                // "source": `api-dev.lingox.co`,
+                "game_name": "image-to-word"
+            });
         else
             body = data
         // console.log(method, "body: ", body)
@@ -79,7 +84,7 @@ export class APIManager extends Component {
     }
 
     public static Challenge(name: string, score: number) {
-        APIManager.requestData(`POST`, `/api/updateEventChallenge`, {
+        APIManager.requestData(`POST`, `/updateEventChallenge`, {
             "username": APIManager.userDATA?.username,
             "name": name,
             "score": score
